@@ -31,57 +31,46 @@ Project Planning:
 
 cli.rb
 	call
-		make_podcasts - Create object array of podcasts using scrape_index_page
+		make_cats - Create object array of cats using scrape_index_page
 		add_attributes_to_podcasts - Add data to each object using stitcher url via scrape_profile_page
-		-Puts "Welcome to the 100 most popular podcasts of the week!"
-		menu
+		puts "Cats are neat! Check out all the different cat breeds!"
+		list_all
 		goodbye
 
 
-	menu
-		puts "List all"
-		puts "Filter by Category"
-
-	List All
-		puts "List:"
-		puts "[1] All At Once"
-		puts "[2] 1-25"
-		puts "[3] 26-50"
-		puts "[4] 51-75"
-		puts "[5] 76-100"
-
-	By Category
-		puts "List:"
-		puts "[1] Comedy"
-		puts "[2] Education"
-		puts "[3] News"
-		puts "[4] Society and Culture"
-
-
-
-
-
+	list_all
+		puts all cats in alphabetical order in numbered list
+		puts "Which breed would you like to learn more about?"
+		puts "Enter the number or the name of the breed. Type exit to close."
+		input = gets.strip
 
 
 
 scraper.rb
 	scrape_index_page(url)
-		podcast[:name] =
-		podcast[:rank] =
-		podcast[:genre] =
-		podcast[:page_url] =
+		breed[:name] = doc.css("a.callout .callout-label").first.text.gsub(" Cat Breed\n", "")
+		breed[:page_url] = doc.css("a.callout").first.attr("href")
 
 	scrape_profile_page(url)
-		podcast[:about] =
-		podcast[:rating] = 
-		pdocast[:review_count] =
-		podcast[:twitter_url] = (If nil, "this podcast does not have a twitter/fb")
-		podcast[:facebook_url] = (If nil, "this podcast does not have a twitter/fb")
+
+		breed[:size] =
+		breed[:coat] =
+		breed[:color] =
+			size/coat/color
+			key = doc.css("div.statsDef-content-list-item-label").first.text
+			value = doc.css("div.statsDef-content-list-item-value").first.text.gsub("\n","").strip
+
+		breed[:description] = doc.css("div.blurb-content-hd-titleMd p").text
+		breed[:fun_fact] = doc.css("div.quarantine").first.text.gsub("\n","").strip
 
 
+		breed[:similar] =
+			Similar Cat Breeds
+			(For Each)
+			breed = doc.css("a.callout").first.css("img").first.attr("alt")
+			url = BASE_PATH + "/#{breed}"
 
 
+cat.rb
 
-
-
-podcast.rb
+	attr_accessor :name, :page_url, :size, :coat, :color, :description, :fun_fact, :similar
