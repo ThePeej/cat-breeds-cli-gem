@@ -35,8 +35,8 @@ class CatBreeds::CLI
 	end
 
 	def view_breed(breed)
-		breed_details = CatBreeds::Scraper.scrape_profile(BASE_PATH + breed.page_url)
-		# breed.view_details()
+		details = CatBreeds::Scraper.scrape_profile_overview(BASE_PATH + breed.page_url)
+		breed.add_details(details)
 		binding.pry
 	end
 

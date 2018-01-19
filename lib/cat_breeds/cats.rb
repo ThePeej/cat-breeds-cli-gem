@@ -1,5 +1,5 @@
 class CatBreeds::Cat
-	attr_accessor :name, :page_url, :size, :coat, :color, :description, :fun_fact, :similar
+	attr_accessor :name, :page_url, :blurb, :fun_fact, :similar, :coat, :color, :description
 
 	@@all = []
 
@@ -9,8 +9,10 @@ class CatBreeds::Cat
 		self.class.all << self
 	end
 
-	def add_or_view_details
-
+	def add_details(details)
+		details.each do |k,v|
+			self.send("#{k}=", v)
+		end
 	end
 
 
