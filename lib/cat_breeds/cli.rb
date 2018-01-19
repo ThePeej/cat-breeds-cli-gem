@@ -1,7 +1,7 @@
 class CatBreeds::CLI
 
 	# BASE_PATH = "https://www.purina.com/cats/cat-breeds"
-	BASE_PATH = "http://www.vetstreet.com/"
+	BASE_PATH = "http://www.vetstreet.com"
 
 	def call
 		puts ""
@@ -9,6 +9,7 @@ class CatBreeds::CLI
 		cat_breeds = make_cats
 		list_cats(cat_breeds)
 		prompt
+		goodbye
 	end
 
 	def make_cats
@@ -26,8 +27,24 @@ class CatBreeds::CLI
 	end
 
 	def prompt
+		cat = nil
 		puts ""
 		puts "Enter the cat breed or number that you would like to learn more about:"
 		input = gets.strip
+		view_breed(CatBreeds::Cat.all[input.to_i - 1])	
 	end
+
+	def view_breed(breed)
+		breed_details = CatBreeds::Scraper.scrape_profile(BASE_PATH + breed.page_url)
+		# breed.view_details()
+		binding.pry
+	end
+
+
+	def goodbye
+		puts ""
+		puts "Cat's rule!"
+		puts ""
+	end
+
 end

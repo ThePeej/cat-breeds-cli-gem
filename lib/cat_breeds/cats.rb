@@ -9,6 +9,11 @@ class CatBreeds::Cat
 		self.class.all << self
 	end
 
+	def add_or_view_details
+
+	end
+
+
 
 	def self.all
 		@@all
