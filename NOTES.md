@@ -48,8 +48,8 @@ cli.rb
 
 scraper.rb
 	scrape_index_page(url)
-		breed[:name] = doc.css("a.callout .callout-label").first.text.gsub(" Cat Breed\n", "")
-		breed[:page_url] = doc.css("a.callout").first.attr("href")
+		breed[:name] =
+		breed[:page_url] =
 
 	scrape_profile_page(url)
 
