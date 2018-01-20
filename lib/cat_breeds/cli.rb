@@ -55,25 +55,29 @@ class CatBreeds::CLI
 	def view_more_details(breed)
 		puts ""
 		puts "Learn more about the #{breed.name}:"
-		puts "[1] History"
-		puts "[2] Personality"
-		puts "[3] Grooming"
-		puts "[4] Health"
+		puts "[1] Description"
+		puts "[2] History"
+		puts "[3] Personality"
+		puts "[4] Grooming"
+		puts "[5] Health"
 		puts "[Back] to list of all cat breeds"
 		input = gets.strip
 		topic = nil
 		info = nil
 		case input.downcase
-		when "1","history"
+		when "1","description"
+			topic = "Description"
+			info = breed.description
+		when "2","history"
 			topic = "History"
 			info = breed.history
-		when "2","personality"
+		when "3","personality"
 			topic = "Personality"
 			info = breed.personality
-		when "3","grooming"
+		when "4","grooming"
 			topic = "Grooming"
 			info = breed.grooming
-		when "4","health"
+		when "5","health"
 			topic = "Health"
 			info = breed.health
 		when "back"

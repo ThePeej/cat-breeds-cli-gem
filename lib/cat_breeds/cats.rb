@@ -1,5 +1,5 @@
 class CatBreeds::Cat
-	attr_accessor :name, :page_url, :blurb, :fun_fact, :overview, :history, :personality, :health, :grooming
+	attr_accessor :name, :page_url, :blurb, :fun_fact, :description, :history, :personality, :health, :grooming
 
 	@@all = []
 

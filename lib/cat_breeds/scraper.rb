@@ -19,7 +19,7 @@ class CatBreeds::Scraper
 		doc = Nokogiri::HTML(open(url))
 		breed[:blurb] = doc.css("#breed-detail p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
 		breed[:fun_fact] = doc.css(".interesting-breed-fact p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
-		breed[:overview] = doc.css("#overview .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
+		breed[:description] = doc.css("#overview .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
 		breed[:history] = doc.css("#history .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
 		breed[:personality] = doc.css("#personality .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
 		breed[:health] = doc.css("#health .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
