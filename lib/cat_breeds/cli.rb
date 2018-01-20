@@ -6,9 +6,8 @@ class CatBreeds::CLI
 	def start
 		puts ""
 		puts "Cats are neat! Check out all the different cat breeds!"
-		cat_breeds = make_cats
-		list_cats(cat_breeds)
-		goodbye
+		breeds = make_cats
+		list_cats(breeds)
 	end
 
 	def make_cats
@@ -18,13 +17,24 @@ class CatBreeds::CLI
 		end
 	end
 
-	def list_cats(cat_breeds)
+	def list_cats(breeds)
 		puts ""
-		cat_breeds.each.with_index(1) {|b,i|puts "#{i}. #{b.name}"}
+		breeds.each.with_index(1) {|b,i|puts "[#{i}] #{b.name}"}
+		puts "[exit]"
 		puts ""
 		puts "Enter the cat breed or number that you would like to learn more about:"
 		input = gets.strip
-		view_breed_overview(CatBreeds::Cat.all[input.to_i - 1])
+		if input.to_i > 0
+			view_breed_overview(CatBreeds::Cat.all[input.to_i - 1])
+		elsif CatBreeds::Cat.all.detect{|breed|breed.name.downcase == input.downcase}
+			view_breed_overview(CatBreeds::Cat.all.detect{|breed| breed.name.downcase == input.downcase})
+		elsif input.downcase == "exit"
+			self.goodbye
+		else
+			puts ""
+			puts "Invalid Input. Please try again."
+			self.list_cats(breeds)
+		end
 	end
 
 	def view_breed_overview(breed)
@@ -32,24 +42,24 @@ class CatBreeds::CLI
 		breed.add_details(details)
 		puts ""
 		puts "----------------------------------------"
-		puts "Overview of the #{breed.name}!"
+		puts "Overview of the #{breed.name}"
 		puts "----------------------------------------"
 		puts ""
 		puts "#{breed.blurb}"
 		puts ""
 		puts "Fun Fact!"
 		puts "#{breed.fun_fact}"
-		puts ""
 		view_more_details(breed)
 	end
 
 	def view_more_details(breed)
-		puts "Learn more about the #{breed.name}"
+		puts ""
+		puts "Learn more about the #{breed.name}:"
 		puts "[1] History"
 		puts "[2] Personality"
 		puts "[3] Grooming"
 		puts "[4] Health"
-		puts "[5] [Back] to list of all cat breeds"
+		puts "[Back] to list of all cat breeds"
 		input = gets.strip
 		topic = nil
 		info = nil
@@ -66,14 +76,20 @@ class CatBreeds::CLI
 		when "4","health"
 			topic = "Health"
 			info = breed.health
-		when "5", "back"
+		when "back"
 			start
 		when "exit"
 			goodbye
 		else
+			puts ""
 			puts "Invalid Input. Please try again."
 			view_more_details(breed)
 		end
+		view_topic(breed, topic, info)
+
+	end
+
+	def view_topic(breed, topic, info)
 		puts ""
 		puts "----------------------------------------"
 		puts "#{topic}"
@@ -93,9 +109,10 @@ class CatBreeds::CLI
 		when "exit"
 			goodbye
 		else
+			puts ""
 			puts "Invalid Input. Please try again."
+			view_topic(topic, info)
 		end
-
 	end
 
 	def goodbye
