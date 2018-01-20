@@ -17,8 +17,13 @@ class CatBreeds::Scraper
 	def self.scrape_profile_overview(url)
 		breed = {}
 		doc = Nokogiri::HTML(open(url))
-		breed[:blurb] = doc.css("#breed-detail p").text
-		breed[:fun_fact] = doc.css(".interesting-breed-fact p").text
+		breed[:blurb] = doc.css("#breed-detail p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
+		breed[:fun_fact] = doc.css(".interesting-breed-fact p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
+		breed[:overview] = doc.css("#overview .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
+		breed[:history] = doc.css("#history .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
+		breed[:personality] = doc.css("#personality .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
+		breed[:health] = doc.css("#health .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
+		breed[:grooming] = doc.css("#grooming .richtext  p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
 		breed
 	end
 
