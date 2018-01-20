@@ -8,7 +8,6 @@ class CatBreeds::CLI
 		puts "Cats are neat! Check out all the different cat breeds!"
 		cat_breeds = make_cats
 		list_cats(cat_breeds)
-		prompt
 		goodbye
 	end
 
@@ -21,25 +20,36 @@ class CatBreeds::CLI
 
 	def list_cats(cat_breeds)
 		puts ""
-		cat_breeds.each.with_index(1) do |b,i|
-			puts "#{i}. #{b.name}"
-		end
-	end
-
-	def prompt
-		cat = nil
+		cat_breeds.each.with_index(1) {|b,i|puts "#{i}. #{b.name}"}
 		puts ""
 		puts "Enter the cat breed or number that you would like to learn more about:"
 		input = gets.strip
-		view_breed(CatBreeds::Cat.all[input.to_i - 1])	
+		view_breed_overview(CatBreeds::Cat.all[input.to_i - 1])
 	end
 
-	def view_breed(breed)
-		details = CatBreeds::Scraper.scrape_profile_overview(BASE_PATH + breed.page_url)
+	def view_breed_overview(breed)
+		details = CatBreeds::Scraper.scrape_profile(BASE_PATH + breed.page_url)
 		breed.add_details(details)
-		binding.pry
+		puts ""
+		puts "Overview of the #{breed.name}!"
+		puts ""
+		puts "#{breed.blurb}"
+		puts ""
+		puts "Fun Fact!"
+		puts "#{breed.fun_fact}"
+		puts ""
+		view_more_details(breed)
 	end
 
+	def view_more_details(breed)
+		puts "Learn more about the #{breed.name}"
+		puts "1. History"
+		puts "2. Personality"
+		puts "3. Grooming"
+		puts "4. Health"
+		puts "5. Go back to list of all cat"
+		input = gets.strip
+	end
 
 	def goodbye
 		puts ""

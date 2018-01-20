@@ -11,8 +11,8 @@ class CatBreeds::Cat
 
 	def add_details(details)
 		details.each do |k,v|
-			binding.pry
-			self.send("#{k}=", v) if self[:"#{k}] = nil
+			# binding.pry
+			self.send("#{k}=", v)
 		end
 	end
 

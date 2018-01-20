@@ -14,7 +14,7 @@ class CatBreeds::Scraper
 		cat_breeds
 	end
 
-	def self.scrape_profile_overview(url)
+	def self.scrape_profile(url)
 		breed = {}
 		doc = Nokogiri::HTML(open(url))
 		breed[:blurb] = doc.css("#breed-detail p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
