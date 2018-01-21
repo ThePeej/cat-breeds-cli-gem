@@ -96,7 +96,7 @@ class CatBreeds::CLI
 	def view_topic(breed, topic, info)
 		puts ""
 		puts "----------------------------------------"
-		puts "#{topic}"
+		puts "#{breed.name} - #{topic}"
 		puts "----------------------------------------"
 		puts ""
 		puts "#{info}"
@@ -123,6 +123,7 @@ class CatBreeds::CLI
 		puts ""
 		puts "Cat's rule! See ya!"
 		puts ""
+		exit
 	end
 
 end

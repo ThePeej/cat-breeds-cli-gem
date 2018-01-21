@@ -11,12 +11,9 @@ class CatBreeds::Cat
 
 	def add_details(details)
 		details.each do |k,v|
-			# binding.pry
 			self.send("#{k}=", v)
 		end
 	end
-
-
 
 	def self.all
 		@@all
