@@ -1,28 +1,20 @@
 # CatBreeds
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cat_breeds`. To experiment with that code, run `bin/console` for an interactive prompt.
-
 TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
 ```ruby
-gem 'cat_breeds'
+gem install cat_breeds
 ```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install cat_breeds
 
 ## Usage
 
-TODO: Write usage instructions here
+Type the command below to start the cat_breeds CLI and start exploring the many amazing breeds of cats!
+
+    $ cat-breeds
+
+Select a cat from the main menu by entering either its breed name or menu number. Once you've selected a cat breed, you will be able to select further details to learn more about that breed. When you select a specific category, you can either go back and look into another category for that same cat breed, or you can go back to the home menu and learn about a different cat breed. Enter exit at any point while using cat_breeds to close out of the gem CLI.
 
 ## Development
 
@@ -40,4 +32,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the CatBreeds project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/cat_breeds/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the CatBreeds project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/ThePeej/cat-breeds-cli-gem/blob/master/CODE_OF_CONDUCT.md).
