@@ -1,9 +1,8 @@
 class CatBreeds::Scraper
 
-	def self.scrape_index(url)
+	def self.scrape_index(url) #creates and returns an array of hashes which contain cat breeds and page urls
 		cat_breeds = []
 		doc = Nokogiri::HTML(open(url))
-		# binding.pry
 		breeds = doc.css("#hub-breed-list-container ul li a")
 		breeds.each do |b|
 			breed = {}
@@ -14,7 +13,7 @@ class CatBreeds::Scraper
 		cat_breeds
 	end
 
-	def self.scrape_profile(url)
+	def self.scrape_profile(url) #creates and returns a hash of a cat breed with more information for the user to view
 		breed = {}
 		doc = Nokogiri::HTML(open(url))
 		breed[:blurb] = doc.css("#breed-detail p").text.gsub("\n","").gsub("\t","").gsub("\r","").strip
@@ -28,10 +27,9 @@ class CatBreeds::Scraper
 		breed
 	end
 
-	def self.scrape_characteristics(url)
+	def self.scrape_characteristics(url) #creates and returns a hash of breed characteristics to be used in self.scrape_profile
 		characteristics = {}
 		doc = Nokogiri::HTML(open(url))
-
 
 		keys = []
 		doc.css("td.title").each {|key| keys << key.text.scan(/\A(\w+\s?\w+)/)[0][0].gsub(" ","_")}
@@ -40,8 +38,8 @@ class CatBreeds::Scraper
 		keys.each_with_index do |key,i|
 			characteristics[key.to_sym] = values[i]
 		end
+
 		characteristics.sort_by{|k,v|k}
-		# Hash[characteristics.sort_by{|k,v|k}]
 	end
 
 

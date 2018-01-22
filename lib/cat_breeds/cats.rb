@@ -9,7 +9,7 @@ class CatBreeds::Cat
 		self.class.all << self
 	end
 
-	def add_details(details)
+	def add_details(details) #takes hash returned from CatBreeds::Scraper.scrape_profile(url) and adds breed data to the corresponding instance of cat breed
 		details.each do |k,v|
 			self.send("#{k}=", v)
 		end

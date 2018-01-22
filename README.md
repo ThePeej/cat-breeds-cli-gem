@@ -1,6 +1,6 @@
 # CatBreeds
 
-TODO: Delete this and the text above, and describe your gem
+A simple command line interface gem that scrapes a website and provides information on cat breeds to the user.
 
 ## Installation
 

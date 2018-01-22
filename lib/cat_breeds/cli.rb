@@ -11,14 +11,14 @@ class CatBreeds::CLI
 		list_cats(breeds)
 	end
 
-	def make_cats
+	def make_cats #Scrapes site index page to gather all of the breeds and breed urls
 		breeds_array = CatBreeds::Scraper.scrape_index(BASE_PATH + "/cats/breeds")
 		breeds_array.collect do |breed|
 			CatBreeds::Cat.new(breed[:name], breed[:page_url])
 		end
 	end
 
-	def list_cats(breeds)
+	def list_cats(breeds) #indexes through array of cat breeds returned from make_cats and lists each one for user to select from
 		puts ""
 		breeds.each.with_index(1) {|b,i|puts "[#{i}] #{b.name}"}
 		puts "type [exit] at any time to close"
@@ -38,7 +38,7 @@ class CatBreeds::CLI
 		end
 	end
 
-	def view_breed_overview(breed)
+	def view_breed_overview(breed) #upon selecting a specific cat breed, this method scrapes that breed's url page for more information
 		details = CatBreeds::Scraper.scrape_profile(BASE_PATH + breed.page_url)
 		breed.add_details(details)
 		puts ""
@@ -53,7 +53,7 @@ class CatBreeds::CLI
 		view_more_details(breed)
 	end
 
-	def view_more_details(breed)
+	def view_more_details(breed) #after more info is scraped from view_breed_overview, more options are presented to learn more about breed
 		puts ""
 		puts "Learn more about the #{breed.name}:"
 		puts "[1] Description"
@@ -104,7 +104,7 @@ class CatBreeds::CLI
 
 	end
 
-	def view_topic(breed, topic, info)
+	def view_topic(breed, topic, info) #once specific topic is selected, more information on that topic is presented to the user
 		puts ""
 		puts "----------------------------------------"
 		puts "#{breed.name} - #{topic}"
@@ -133,7 +133,7 @@ class CatBreeds::CLI
 		end
 	end
 
-	def goodbye
+	def goodbye #upon exiting the program, the user is presented a thank you and cat artwork
 		puts ""
 		puts "Thanks for learning about cats!"
 		puts ""
