@@ -4,7 +4,9 @@ class CatBreeds::CLI
 
 	def start
 		puts ""
-		puts "Cats are neat! Check out all the different cat breeds!"
+		puts "----------------------------------------"
+		puts "               CAT BREEDS               "
+		puts "----------------------------------------"
 		breeds = make_cats
 		list_cats(breeds)
 	end
@@ -19,7 +21,7 @@ class CatBreeds::CLI
 	def list_cats(breeds)
 		puts ""
 		breeds.each.with_index(1) {|b,i|puts "[#{i}] #{b.name}"}
-		puts "[exit]"
+		puts "type [exit] at any time to close"
 		puts ""
 		puts "Enter the cat breed or number that you would like to learn more about:"
 		input = gets.strip
@@ -116,7 +118,6 @@ class CatBreeds::CLI
 		puts ""
 		puts "[1] Learn more about the #{breed.name}"
 		puts "[2] Learn about a different cat breed"
-		puts "[exit]"
 		input = gets.strip
 		case input.downcase
 		when "1"
@@ -133,6 +134,8 @@ class CatBreeds::CLI
 	end
 
 	def goodbye
+		puts ""
+		puts "Thanks for learning about cats!"
 		puts ""
 		puts "        _                        "
         puts "        \\`*-.                    "
