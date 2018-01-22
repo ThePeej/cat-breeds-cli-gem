@@ -14,7 +14,10 @@ Type the command below to start the cat_breeds CLI and start exploring the many 
 
     $ cat-breeds
 
-Select a cat from the main menu by entering either its breed name or menu number. Once you've selected a cat breed, you will be able to select further details to learn more about that breed. When you select a specific category, you can either go back and look into another category for that same cat breed, or you can go back to the home menu and learn about a different cat breed. Enter exit at any point while using cat_breeds to close out of the gem CLI.
+-Select a cat from the main menu by entering either its breed name or menu number. 
+-Once you've selected a cat breed, you will be able to select further details to learn more about that breed. 
+-When you select a specific category, you can either go back and look into another category for that same cat breed, or you can go back to the home menu and learn about a different cat breed. 
+-Enter exit at any point while using cat_breeds to close out of the gem CLI.
 
 ## Development
 
