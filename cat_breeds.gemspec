@@ -19,10 +19,10 @@ Gem::Specification.new do |spec|
   end
   # spec.files         = ["lib/cat-breeds.rb", "lib/cats.rb", "lib/cli.rb", "lib/scraper.rb", "bin/cat-breeds"]
 
-  spec.bindir        = "bin"
-  spec.executables << ['cat-breeds']
+  # spec.bindir        = "bin"
+  spec.executables = ['cat-breeds']
   # spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  # spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.16"
