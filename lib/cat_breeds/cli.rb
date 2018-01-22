@@ -1,6 +1,5 @@
 class CatBreeds::CLI
 
-	# BASE_PATH = "https://www.purina.com/cats/cat-breeds"
 	BASE_PATH = "http://www.vetstreet.com"
 
 	def start
@@ -56,10 +55,11 @@ class CatBreeds::CLI
 		puts ""
 		puts "Learn more about the #{breed.name}:"
 		puts "[1] Description"
-		puts "[2] History"
-		puts "[3] Personality"
-		puts "[4] Grooming"
-		puts "[5] Health"
+		puts "[2] Characteristics"
+		puts "[3] History"
+		puts "[4] Personality"
+		puts "[5] Grooming"
+		puts "[6] Health"
 		puts "[Back] to list of all cat breeds"
 		input = gets.strip
 		topic = nil
@@ -68,16 +68,25 @@ class CatBreeds::CLI
 		when "1","description"
 			topic = "Description"
 			info = breed.description
-		when "2","history"
+		when "2","characteristics"
+			topic = "Characteristics"
+			info = Proc.new{
+				i = 0
+				while i < breed.characteristics.length
+					puts "#{breed.characteristics[i][0]}: #{breed.characteristics[i][1]}"
+					i += 1
+				end
+				}
+		when "3","history"
 			topic = "History"
 			info = breed.history
-		when "3","personality"
+		when "4","personality"
 			topic = "Personality"
 			info = breed.personality
-		when "4","grooming"
+		when "5","grooming"
 			topic = "Grooming"
 			info = breed.grooming
-		when "5","health"
+		when "6","health"
 			topic = "Health"
 			info = breed.health
 		when "back"
@@ -99,7 +108,11 @@ class CatBreeds::CLI
 		puts "#{breed.name} - #{topic}"
 		puts "----------------------------------------"
 		puts ""
-		puts "#{info}"
+		if info.is_a?(String)
+			puts "#{info}"
+		else 
+			info.call
+		end
 		puts ""
 		puts "[1] Learn more about the #{breed.name}"
 		puts "[2] Learn about a different cat breed"
@@ -115,13 +128,27 @@ class CatBreeds::CLI
 		else
 			puts ""
 			puts "Invalid Input. Please try again."
-			view_topic(topic, info)
+			view_topic(breed, topic, info)
 		end
 	end
 
 	def goodbye
 		puts ""
-		puts "Cat's rule! See ya!"
+		puts "        _                        "
+        puts "        \\`*-.                    "
+        puts "         )  _`-.                 "
+        puts "        .  : `. .                "
+        puts "        : _   '  \\               "
+        puts "        ; *` _.   `*-._          "
+        puts "        `-.-'          `-.       "
+        puts "          ;       `       `.     "
+        puts "          :.       .        \\    "
+        puts "          . \\  .   :   .-'   .   "
+        puts "          '  `+.;  ;  '      :   "
+        puts "          :  '  |    ;       ;-. "
+        puts "          ; '   : :`-:     _.`* ;"
+        puts " [bye] .*' /  .*' ; .*`- +'  `*' "
+        puts "       `*-*   `*-*  `*-*'        "
 		puts ""
 		exit
 	end
