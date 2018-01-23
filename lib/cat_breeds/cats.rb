@@ -6,7 +6,7 @@ class CatBreeds::Cat
 	def initialize(name, page_url)
 		@name = name
 		@page_url = page_url
-		self.class.all << self
+		@@all << self
 	end
 
 	def add_details(details) #takes hash returned from CatBreeds::Scraper.scrape_profile(url) and adds breed data to the corresponding instance of cat breed

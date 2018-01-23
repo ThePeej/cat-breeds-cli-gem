@@ -8,6 +8,7 @@ class CatBreeds::CLI
 		puts "               CAT BREEDS               "
 		puts "----------------------------------------"
 		breeds = make_cats
+		@i = 0
 		list_cats(breeds)
 	end
 
@@ -20,15 +21,33 @@ class CatBreeds::CLI
 
 	def list_cats(breeds) #indexes through array of cat breeds returned from make_cats and lists each one for user to select from
 		puts ""
-		breeds.each.with_index(1) {|b,i|puts "[#{i}] #{b.name}"}
+		breeds[@i..@i+9].each.with_index(@i + 1) {|b,i|puts "[#{i}] #{b.name}"}
+		puts "[next]" if @i == 0
+		puts "[back||next]" if @i >= 10 && @i < 40
+		puts "[back]" if @i == 40
+		puts ""
 		puts "type [exit] at any time to close"
 		puts ""
 		puts "Enter the cat breed or number that you would like to learn more about:"
 		input = gets.strip
-		if input.to_i > 0
+		if input.to_i > 0 && input.to_i <= breeds.length
 			view_breed_overview(CatBreeds::Cat.all[input.to_i - 1])
 		elsif CatBreeds::Cat.all.detect{|breed|breed.name.downcase == input.downcase}
 			view_breed_overview(CatBreeds::Cat.all.detect{|breed| breed.name.downcase == input.downcase})
+		elsif input.downcase == "next" && @i == 40
+			puts ""
+			puts "That's all the cat breeds!"
+			list_cats(breeds)
+		elsif input.downcase == "next"
+			@i += 10
+			list_cats(breeds)
+		elsif input.downcase == "back" && @i == 0
+			puts ""
+			puts "That's all the cat breeds!"
+			list_cats(breeds)
+		elsif input.downcase == "back"
+			@i -= 10
+			list_cats(breeds)
 		elsif input.downcase == "exit"
 			self.goodbye
 		else
