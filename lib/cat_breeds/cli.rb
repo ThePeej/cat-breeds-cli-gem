@@ -24,6 +24,7 @@ class CatBreeds::CLI
 		puts ""
 		breeds[@i..@i+@j].each.with_index(@i + 1) {|b,i|puts "[#{i}] #{b.name}"}
 		puts "[all]" if @j != 49
+		puts "[less]" if @j == 49
 		puts "[next]" if @i == 0 && @j == 9
 		puts "[back||next]" if @i >= 10 && @i+@j <49
 		puts "[back]" if @i+@j >= 49 && @j == 9
@@ -39,6 +40,10 @@ class CatBreeds::CLI
 		elsif input.downcase == "all"
 			@i = 0
 			@j = 49
+			list_cats(breeds)
+		elsif input.downcase == "less"
+			@i = 0
+			@j = 9
 			list_cats(breeds)
 		elsif input.downcase == "next" && @i+@j == 49
 			puts ""
